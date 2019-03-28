@@ -23,17 +23,15 @@
 
 
     <EditText
-        android:id="@+id/txt_rut_usuario"
+        android:id="@+id/txt_rut_jugador"
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:background="@drawable/campo_texto"
-        android:backgroundTintMode="src_over"
         android:fontFamily="@font/pt_sans"
         android:inputType="text"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:text="Name"
-        android:textAlignment="center" />
+        android:text="Name" />
 
     <TextView
         android:id="@+id/textView2"
@@ -50,13 +48,11 @@
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:background="@drawable/campo_texto"
-        android:backgroundTintMode="src_over"
         android:fontFamily="@font/pt_sans"
         android:inputType="text"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:text="Name"
-        android:textAlignment="center" />
+        android:text="Name"/>
 
     <TextView
         android:id="@+id/textView3"
@@ -69,17 +65,15 @@
 
 
     <EditText
-        android:id="@+id/txt_rut_usuario"
+        android:id="@+id/txt_curso_jugador"
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:background="@drawable/campo_texto"
-        android:backgroundTintMode="src_over"
         android:fontFamily="@font/pt_sans"
         android:inputType="text"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:text="Name"
-        android:textAlignment="center" />
+        android:text="Name" />
 
 
 </LinearLayout>
