@@ -5,6 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Preguntarjeta"
-    android:background="@drawable/pantalla_preguntarjeta_activado">
+    android:background="@drawable/preguntarjeta_fondo">
 
 </RelativeLayout>

@@ -5,6 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Ranking"
-    android:background="@drawable/inicio_fondo">
+    android:background="@drawable/ranking_fondo">
 
 </RelativeLayout>
