@@ -7,4 +7,15 @@
     tools:context=".Perfil"
     android:background="@drawable/perfil_fondo">
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="RUT JUGADOR/A"/>
+    </LinearLayout>
+
 </RelativeLayout>
