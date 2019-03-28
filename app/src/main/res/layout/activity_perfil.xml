@@ -1,21 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Perfil"
-    android:background="@drawable/perfil_fondo">
+    android:background="@drawable/perfil_fondo"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="60dp"
+    android:paddingRight="60dp"
+    tools:context=".Perfil">
 
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="29dp"
+        android:text="Rut Jugador/a"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="RUT JUGADOR/A"/>
-    </LinearLayout>
 
-</RelativeLayout>
+    <EditText
+        android:id="@+id/txt_rut_usuario"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:background="@drawable/campo_texto"
+        android:backgroundTintMode="src_over"
+        android:fontFamily="@font/pt_sans"
+        android:inputType="text"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="Name"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="29dp"
+        android:text="Nombre "
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+
+
+    <EditText
+        android:id="@+id/txt_nombre_jugador"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:background="@drawable/campo_texto"
+        android:backgroundTintMode="src_over"
+        android:fontFamily="@font/pt_sans"
+        android:inputType="text"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="Name"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="29dp"
+        android:text="Curso"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+
+
+    <EditText
+        android:id="@+id/txt_rut_usuario"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:background="@drawable/campo_texto"
+        android:backgroundTintMode="src_over"
+        android:fontFamily="@font/pt_sans"
+        android:inputType="text"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="Name"
+        android:textAlignment="center" />
+
+
+</LinearLayout>
