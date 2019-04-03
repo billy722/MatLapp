@@ -74,5 +74,22 @@
 
     </Spinner>
 
+    <TextView
+        android:id="@+id/txthola"
+        android:layout_width="match_parent"
+        android:layout_height="29dp"
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btn_aceptar_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ACEPTAR"
+        android:textStyle="bold"
+        android:background="#5225A5"/>
+
 
 </LinearLayout>
