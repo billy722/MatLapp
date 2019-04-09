@@ -9,12 +9,11 @@ import java.util.Map;
 
 public class Jugador extends StringRequest {
 
-    private static final String url_login = "http://146.66.99.89/~daemmulc/matlapp/login.php";
     private Map<String, String> parametros;
 
 
-    public Jugador(String rut, String nombre, int curso, Response.Listener<String> listener) {
-        super(Method.POST, url_login, listener,null);
+    public Jugador(String rut, String nombre, int curso, String url,Response.Listener<String> listener) {
+        super(Method.POST, url, listener,null);
 
 
         parametros = new HashMap<>();

@@ -68,8 +68,44 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
     }
 
     public void registrar_jugador(){
-        AlertDialog.Builder mensaje = new AlertDialog.Builder(Perfil.this);
-        mensaje.setMessage("hola, hay que registrar un usuario").create().show();
+
+        //ASIGNO VALOR A LAS VARIABLES
+        final String rut = txt_rut.getText().toString();
+        final String nombre = txt_rut.getText().toString();
+        final int curso = Integer.parseInt(txt_rut.getText().toString());
+
+        Response.Listener<String> loginListenter = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONObject respuestaJson = new JSONObject(response);
+                    String respuesta = respuestaJson.getString("creado");
+
+                    if(respuesta.equals("si")){
+
+                        logear_jugador(rut,nombre);
+
+                        AlertDialog.Builder alert_mensaje = new AlertDialog.Builder(Perfil.this);
+                        alert_mensaje.setMessage("Jugador creado, ya puedes jugar¡").create().show();
+
+
+                    }else if(respuesta.equals("no")){
+                        AlertDialog.Builder alert_mensaje = new AlertDialog.Builder(Perfil.this);
+                        alert_mensaje.setMessage("OCURRIO UN ERROR, INTENTE NUEVAMENTE").create().show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        Jugador login = new Jugador(rut, nombre, curso,"http://146.66.99.89/~daemmulc/matlapp/crear_jugador.php" ,loginListenter);
+        RequestQueue queue = Volley.newRequestQueue(Perfil.this);
+        queue.add(login);
+
+
     }
 
     public void activar_desactivar_campos_texto(Boolean estado){
@@ -112,6 +148,19 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
 
     }
 
+
+    public void logear_jugador(String rut_jugador, String nombre_jugador){
+        //CREA VARIABLES DE SESION
+
+        SharedPreferences preferencias = getSharedPreferences("datos_session_login",   Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferencias.edit();
+        editor.putString("rut_jugador_logeado" , rut_jugador);
+        editor.putString("nombre_jugador_logeado" , nombre_jugador);
+        editor.commit();
+
+        activar_desactivar_campos_texto(false);
+    }
+
     public void consulta_jugador_existe(){
         //ASIGNO VALOR A LAS VARIABLES
         final String rut = txt_rut.getText().toString();
@@ -133,19 +182,11 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
 
                         txt_nombre.setText(nombre_recibido);
 
+                        logear_jugador(rut_recibido,nombre_recibido);
+
                         //mensaje en pantalla
                         AlertDialog.Builder alert_mensaje = new AlertDialog.Builder(Perfil.this);
                         alert_mensaje.setMessage("Bienvenido "+nombre_recibido).create().show();
-
-                        //CREA VARIABLES DE SESION
-
-                        SharedPreferences preferencias = getSharedPreferences("datos_session_login",   Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = preferencias.edit();
-                        editor.putString("rut_jugador_logeado" , rut_recibido);
-                        editor.putString("nombre_jugador_logeado" , nombre_recibido);
-                        editor.commit();
-
-                        activar_desactivar_campos_texto(false);
 
 
                     }else if(respuesta.equals("no")){
@@ -164,7 +205,7 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
             }
         };
 
-        Jugador login = new Jugador(rut, nombre, curso, loginListenter);
+        Jugador login = new Jugador(rut, nombre, curso,"http://146.66.99.89/~daemmulc/matlapp/login.php" ,loginListenter);
         RequestQueue queue = Volley.newRequestQueue(Perfil.this);
         queue.add(login);
     }
