@@ -26,7 +26,10 @@ public class Inicio extends AppCompatActivity {
 
 //        if(nombre_jugador_logeado.equals("")){
 //            AlertDialog.Builder alert_mensaje = new AlertDialog.Builder(Inicio.this);
-//            alert_mensaje.setMessage("DEBE LOGEARSE PARA COMENZAR AJUGAR").create().show();
+//            alert_mensaje.setMessage("DEBE LOGEARSE PARA COMENZAR A JUGAR").create().show();
+//        }else{
+//            AlertDialog.Builder alert_mensaje = new AlertDialog.Builder(Inicio.this);
+//            alert_mensaje.setMessage("Binvenido "+nombre_jugador_logeado).create().show();
 //        }
 
         //CODIGO PARA REDIRECCIONAR CON EL BORON_INSTRUCCIONES

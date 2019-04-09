@@ -19,7 +19,7 @@ import com.example.matlabapp.Clases.Jugador;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Perfil extends AppCompatActivity implements View.OnClickListener {
+public class Perfil extends AppCompatActivity implements View.OnFocusChangeListener {
     //DEFINO VARIABLES
     Spinner selector_cursos;
     EditText txt_rut, txt_nombre;
@@ -43,13 +43,76 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
         ArrayAdapter <String> lista_cursos = new ArrayAdapter<String>( this, R.layout.estilo_spinner,cursos);
         selector_cursos.setAdapter(lista_cursos);
 
-        btn_aceptar.setOnClickListener(this);
+        txt_rut.setOnFocusChangeListener(this);
+
+        consultar_jugador_logeado();
     }
 
+    public void consultar_jugador_logeado(){
+        SharedPreferences prefs = getSharedPreferences("datos_session_login", Context.MODE_PRIVATE);
+        String rut_jugador_logeado = prefs.getString("rut_jugador_logeado", "");
 
-    @Override
-    public void onClick(View v) {
+        if(rut_jugador_logeado.equals("")){
+            //NO ESTA LOGEADO
+            activar_desactivar_campos_texto(true);
+            txt_rut.setText("");
+            txt_nombre.setText("");
+            selector_cursos.setSelection(0);
+        }else{
+            //ESTA LOGEADO
+            activar_desactivar_campos_texto(false);
+            String nombre_jugador = prefs.getString("nombre_jugador_logeado", "");
+            txt_rut.setText(rut_jugador_logeado);
+            txt_nombre.setText(nombre_jugador);
+        }
+    }
 
+    public void registrar_jugador(){
+        AlertDialog.Builder mensaje = new AlertDialog.Builder(Perfil.this);
+        mensaje.setMessage("hola, hay que registrar un usuario").create().show();
+    }
+
+    public void activar_desactivar_campos_texto(Boolean estado){
+
+        if(estado){
+           txt_rut.setEnabled(true);
+           txt_nombre.setEnabled(true);
+           selector_cursos.setEnabled(true);
+           btn_aceptar.setText("ACEPTAR");
+
+            btn_aceptar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    registrar_jugador();
+                }
+            });
+
+        }else{
+           txt_rut.setEnabled(false);
+           txt_nombre.setEnabled(false);
+           selector_cursos.setEnabled(false);
+           btn_aceptar.setText("CAMBIAR JUGADOR");
+
+           btn_aceptar.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+
+                   SharedPreferences preferencias = getSharedPreferences("datos_session_login",   Context.MODE_PRIVATE);
+                   SharedPreferences.Editor editor = preferencias.edit();
+                   editor.putString("rut_jugador_logeado" , "");
+                   editor.putString("nombre_jugador_logeado" , "");
+                   editor.commit();
+
+                   consultar_jugador_logeado();
+               }
+           });
+
+        }
+
+    }
+
+    public void consulta_jugador_existe(){
         //ASIGNO VALOR A LAS VARIABLES
         final String rut = txt_rut.getText().toString();
         final String nombre = txt_rut.getText().toString();
@@ -82,13 +145,16 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
                         editor.putString("nombre_jugador_logeado" , nombre_recibido);
                         editor.commit();
 
-                        //SharedPreferences prefs = getSharedPreferences("datos_session_login",   Context.MODE_PRIVATE);
-                        //String email = prefs.getString("email", ""); // prefs.getString("nombre del campo" , "valor por defecto")
+                        activar_desactivar_campos_texto(false);
+
 
                     }else if(respuesta.equals("no")){
 
                         AlertDialog.Builder alert_mensaje = new AlertDialog.Builder(Perfil.this);
                         alert_mensaje.setMessage("NO ESTA REGISTRADO").create().show();
+
+                        activar_desactivar_campos_texto(true);
+
 
                     }
 
@@ -101,5 +167,15 @@ public class Perfil extends AppCompatActivity implements View.OnClickListener {
         Jugador login = new Jugador(rut, nombre, curso, loginListenter);
         RequestQueue queue = Volley.newRequestQueue(Perfil.this);
         queue.add(login);
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        if(hasFocus==false){
+
+            consulta_jugador_existe();
+
+        }
+
     }
 }

@@ -7,48 +7,7 @@
     android:background="@drawable/despliegue_pantalla_fondo"
     tools:context=".Preguntarjetadesplegada">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/button"
 
-            android:layout_Top="200dp"
-
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:text="Button" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="166dp"
-            android:layout_height="166dp"
-            android:layout_weight="1"
-            android:text="Button"
-            android:background="@drawable/icono_hexagono"/>
-
-    </LinearLayout>
-
-    <LinearLayout1
-
-        <Button
-            android:id="@+id/b"
-
-            android:layout_Top="200dp"
-
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:text="Button" />
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="196dp"
-            android:layout_height="166dp"
-            android:layout_weight="1"
-            android:text="Button"
-            android:background="@drawable/icono_cuadrado">
-
-    </LinearLayout>
 
 </RelativeLayout>

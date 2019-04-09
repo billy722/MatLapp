@@ -1,0 +1,13 @@
+1: insert a tabla tb_registro_respuestas con los campos: 
+alumno(rut),
+id_pregunta,
+correcta(0 o 1),
+id_juego
+
+2: Modificar insert de jugador ganador a la tabla tb_jugadores_juegos recibiendo: id_juego y rut_jugador
+
+3: seleccionar una pregunta al azar, de un curso seleccionado
+
+4: ver todos los jugadores de un juego
+
+5: seleccionar los 5 jugadores con mas respuestas correctas
