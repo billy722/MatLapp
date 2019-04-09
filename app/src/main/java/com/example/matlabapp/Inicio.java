@@ -1,6 +1,9 @@
 package com.example.matlabapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +19,15 @@ public class Inicio extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
+
+
+        SharedPreferences prefs = getSharedPreferences("datos_session_login", Context.MODE_PRIVATE);
+        String nombre_jugador_logeado = prefs.getString("nombre_jugador_logeado", "");
+
+//        if(nombre_jugador_logeado.equals("")){
+//            AlertDialog.Builder alert_mensaje = new AlertDialog.Builder(Inicio.this);
+//            alert_mensaje.setMessage("DEBE LOGEARSE PARA COMENZAR AJUGAR").create().show();
+//        }
 
         //CODIGO PARA REDIRECCIONAR CON EL BORON_INSTRUCCIONES
         boton_instrucciones = findViewById(R.id.btn_instrucciones);
