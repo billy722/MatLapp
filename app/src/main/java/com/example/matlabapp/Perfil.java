@@ -71,8 +71,8 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
 
         //ASIGNO VALOR A LAS VARIABLES
         final String rut = txt_rut.getText().toString();
-        final String nombre = txt_rut.getText().toString();
-        final int curso = Integer.parseInt(txt_rut.getText().toString());
+        final String nombre = txt_nombre.getText().toString();
+        final int curso = (selector_cursos.getSelectedItemPosition()+1);
 
         Response.Listener<String> loginListenter = new Response.Listener<String>() {
             @Override
@@ -81,6 +81,11 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
                 try {
                     JSONObject respuestaJson = new JSONObject(response);
                     String respuesta = respuestaJson.getString("creado");
+//                    String respuesta_campos = respuestaJson.getString("campos");
+
+
+//                    AlertDialog.Builder alert_mensaje_prueba = new AlertDialog.Builder(Perfil.this);
+//                    alert_mensaje_prueba.setMessage("RESULTADO: "+respuesta+" campos: "+respuesta_campos).create().show();
 
                     if(respuesta.equals("si")){
 
@@ -88,7 +93,6 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
 
                         AlertDialog.Builder alert_mensaje = new AlertDialog.Builder(Perfil.this);
                         alert_mensaje.setMessage("Jugador creado, ya puedes jugar¡").create().show();
-
 
                     }else if(respuesta.equals("no")){
                         AlertDialog.Builder alert_mensaje = new AlertDialog.Builder(Perfil.this);
@@ -101,9 +105,9 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
             }
         };
 
-        Jugador login = new Jugador(rut, nombre, curso,"http://146.66.99.89/~daemmulc/matlapp/crear_jugador.php" ,loginListenter);
+        Jugador registro = new Jugador(rut, nombre, curso,"http://146.66.99.89/~daemmulc/matlapp/crear_jugador.php" ,loginListenter);
         RequestQueue queue = Volley.newRequestQueue(Perfil.this);
-        queue.add(login);
+        queue.add(registro);
 
 
     }
@@ -186,7 +190,7 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
 
                         //mensaje en pantalla
                         AlertDialog.Builder alert_mensaje = new AlertDialog.Builder(Perfil.this);
-                        alert_mensaje.setMessage("Bienvenido "+nombre_recibido).create().show();
+                        //alert_mensaje.setMessage("Bienvenido "+nombre_recibido).create().show();
 
 
                     }else if(respuesta.equals("no")){
