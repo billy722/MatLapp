@@ -105,7 +105,7 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
             }
         };
 
-        Jugador registro = new Jugador(rut, nombre, curso,"http://146.66.99.89/~daemmulc/matlapp/crear_jugador.php" ,loginListenter);
+        Jugador registro = new Jugador(rut, nombre, curso,"http://146.66.99.89/~daemmulc/matlapp/perfil/crear_jugador.php" ,loginListenter);
         RequestQueue queue = Volley.newRequestQueue(Perfil.this);
         queue.add(registro);
 
@@ -209,7 +209,7 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
             }
         };
 
-        Jugador login = new Jugador(rut, nombre, curso,"http://146.66.99.89/~daemmulc/matlapp/login.php" ,loginListenter);
+        Jugador login = new Jugador(rut, nombre, curso,"http://146.66.99.89/~daemmulc/matlapp/perfil/login.php" ,loginListenter);
         RequestQueue queue = Volley.newRequestQueue(Perfil.this);
         queue.add(login);
     }

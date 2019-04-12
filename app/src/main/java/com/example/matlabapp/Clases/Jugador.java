@@ -22,6 +22,12 @@ public class Jugador extends StringRequest {
         parametros.put("curso",curso+"");
     }
 
+    public Jugador(String rut, String url, Response.Listener<String> listener){
+      super(Method.POST, url, listener,null);
+        parametros = new HashMap<>();
+        parametros.put("rut",rut);
+    }
+
     @Override
     public Map<String, String> getParams(){
         return parametros;

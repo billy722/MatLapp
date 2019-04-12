@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.matlabapp">
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".Preguntarjetadesplegada"></activity>
+        <activity android:name=".Juego"></activity>
+        <activity android:name=".Preguntarjetadesplegada" />
         <activity android:name=".Ranking" />
         <activity android:name=".Preguntarjeta" />
         <activity android:name=".Instrucciones" />
