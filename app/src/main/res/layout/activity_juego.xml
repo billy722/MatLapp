@@ -1,77 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Juego"
     android:background="@drawable/juego_fondo"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:paddingLeft="60dp"
-    android:paddingRight="60dp">
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/txt_titulo_juego"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:fontFamily="@font/pt_sans"
-        android:text="Primero debes estar en un Juego"
-        android:textAlignment="center"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btn_nuevo_juego"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingLeft="60dp"
+            android:paddingRight="60dp"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/txt_titulo_juego"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:fontFamily="@font/pt_sans"
+                android:text="Primero debes estar en un Juego"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_nuevo_juego"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#5225A5"
+                android:fontFamily="@font/pt_sans"
+                android:text="Crear Juego"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="------------------"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:fontFamily="@font/pt_sans"/>
+
+            <Button
+                android:id="@+id/btn_unirte_juego"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Unirme a un Juego"
+                android:textStyle="bold"
+                android:background="#5225A5"
+                android:fontFamily="@font/pt_sans"/>
+
+            <EditText
+                android:id="@+id/txt_codigo_juego_unirme"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:ems="10"
+                android:inputType="number"
+                android:background="@drawable/campo_texto"
+                android:textAlignment="center"
+                android:hint="Codigo de juego"
+                android:fontFamily="@font/pt_sans"
+                android:textColorHint="#E2000005"
+                android:visibility="invisible"/>
+
+            <Button
+                android:id="@+id/btn_aceptar_unirme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FBE70A"
+                android:fontFamily="@font/pt_sans"
+                android:text="Unirme"
+                android:textColor="#000000"
+                android:textFontWeight="bold"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#5225A5"
-        android:fontFamily="@font/pt_sans"
-        android:text="Crear Juego"
-        android:textStyle="bold" />
+        android:layout_height="match_parent"
+        >
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="------------------"
-        android:gravity="center"
-        android:textColor="#000000"
-        android:fontFamily="@font/pt_sans"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="57dp"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            >
 
-    <Button
-        android:id="@+id/btn_unirte_juego"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Unirme a un Juego"
-        android:textStyle="bold"
-        android:background="#5225A5"
-        android:fontFamily="@font/pt_sans"/>
+            <Button
+                android:id="@+id/btn_instrucciones"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="50dp"
+                android:background="@drawable/icono_instrucciones"
+                style="?android:attr/buttonBarButtonStyle"/>
 
-    <EditText
-        android:id="@+id/txt_codigo_juego_unirme"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:ems="10"
-        android:inputType="number"
-        android:background="@drawable/campo_texto"
-        android:textAlignment="center"
-        android:hint="Codigo de juego"
-        android:fontFamily="@font/pt_sans"
-        android:textColorHint="#E2000005"/>
+            <Button
+                android:id="@+id/btn_perfil"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/icono_perfil" />
 
-    <Button
-        android:id="@+id/btn_aceptar_unirme"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FBE70A"
-        android:fontFamily="@font/pt_sans"
-        android:text="Unirme"
-        android:textColor="#000000"
-        android:textFontWeight="bold"
-        android:textSize="14sp"
-        android:textStyle="bold" />
+            <Button
+                android:id="@+id/btn_preguntarjetas"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/icono_preguntarjeta" />
+
+            <Button
+                android:id="@+id/btn_ranking"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/icono_ranking" />
+
+            <Button
+                android:id="@+id/btn_volver"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/icono_volver" />
 
 
-</LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".Juego"></activity>
+        <activity android:name=".Respuestas"></activity>
+        <activity android:name=".Juego" />
         <activity android:name=".Preguntarjetadesplegada" />
         <activity android:name=".Ranking" />
         <activity android:name=".Preguntarjeta" />

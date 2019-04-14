@@ -1,6 +1,8 @@
 package com.example.matlabapp;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import android.widget.Spinner;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.matlabapp.Clases.Juegos;
 import com.example.matlabapp.Clases.Jugador;
 
 import org.json.JSONException;
@@ -24,6 +27,11 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
     Spinner selector_cursos;
     EditText txt_rut, txt_nombre;
     Button btn_aceptar;
+
+
+    Button boton_instrucciones;
+    Button boton_preguntarjeta;
+    Button boton_ranking;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +54,8 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
         txt_rut.setOnFocusChangeListener(this);
 
         consultar_jugador_logeado();
+
+        cargarFuncionesMenu();
     }
 
     public void consultar_jugador_logeado(){
@@ -92,6 +102,9 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
 
                         AlertDialog.Builder alert_mensaje = new AlertDialog.Builder(Perfil.this);
                         alert_mensaje.setMessage("Jugador creado, ya puedes jugar¡").create().show();
+
+                        Intent intent_inicio = new Intent(Perfil.this, Inicio.class);
+                        Perfil.this.startActivity(intent_inicio);
 
                     }else if(respuesta.equals("no")){
                         AlertDialog.Builder alert_mensaje = new AlertDialog.Builder(Perfil.this);
@@ -191,7 +204,7 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
 
                         //mensaje en pantalla
                         AlertDialog.Builder alert_mensaje = new AlertDialog.Builder(Perfil.this);
-                        //alert_mensaje.setMessage("Bienvenido "+nombre_recibido).create().show();
+                        alert_mensaje.setMessage("Bienvenido "+nombre_recibido).create().show();
 
 
                     }else if(respuesta.equals("no")){
@@ -223,5 +236,126 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
 
         }
 
+    }
+
+
+    public void cargarFuncionesMenu(){
+        //CODIGO PARA REDIRECCIONAR CON EL BORON_INSTRUCCIONES
+        boton_instrucciones = findViewById(R.id.btn_instrucciones);
+        boton_instrucciones.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent_instrucciones = new Intent(Perfil.this, Instrucciones.class);
+                Perfil.this.startActivity(intent_instrucciones);
+                finish();
+
+            }
+        });
+
+
+
+
+        //CODIGO PARA REDIRECCIONAR CON EL BOTON PREGINTARJETAS
+        boton_preguntarjeta = findViewById(R.id.btn_preguntarjetas);
+        boton_preguntarjeta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if(consultar_jugador_logeado_menu()) {
+                    consultar_juego_activo_jugador();
+                }
+
+            }
+        });
+
+
+        //CODIGO PARA REDIRECCIONAR CON EL BOTON RANKING
+        boton_ranking = findViewById(R.id.btn_ranking);
+        boton_ranking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent_ranking = new Intent(Perfil.this, Ranking.class);
+                Perfil.this.startActivity(intent_ranking);
+                finish();
+
+            }
+        });
+    }
+
+
+
+    public Boolean consultar_jugador_logeado_menu(){
+        SharedPreferences prefs = getSharedPreferences("datos_session_login", Context.MODE_PRIVATE);
+        String rut_jugador_logeado = prefs.getString("rut_jugador_logeado", "");
+
+        if(rut_jugador_logeado.equals("")){
+            //NO ESTA LOGEADO
+            AlertDialog.Builder mensaje_login = new AlertDialog.Builder(Perfil.this);
+            mensaje_login.setPositiveButton("Ir a Perfil", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    Intent intent_perfil = new Intent(Perfil.this,Perfil.class);
+                    startActivity(intent_perfil);
+                    finish();
+
+                }
+            });
+            mensaje_login.setMessage("INGRESA TUS DATOS PARA JUGAR").create().show();
+            return false;
+        }else{
+            //ESTA LOGEADO
+            return true;
+        }
+    }
+
+
+
+    public void juegoEnSession(int id_juego){
+        SharedPreferences preferencias = getSharedPreferences("datos_session_login",   Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferencias.edit();
+        editor.putInt("id_juego_activo" ,id_juego );
+        editor.commit();
+    }
+
+    public void consultar_juego_activo_jugador(){
+
+        Response.Listener<String> consulta_juego_listener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONObject respuestaJson = new JSONObject(response);
+                    String respuesta = respuestaJson.getString("juego_activo");
+
+                    if(respuesta.equals("si")){
+                        int id_juego = Integer.parseInt(respuestaJson.getString("id_juego"));
+
+                        juegoEnSession(id_juego);
+
+                        Intent intent_preguntarjeta = new Intent(Perfil.this, Preguntarjeta.class);
+                        Perfil.this.startActivity(intent_preguntarjeta);
+                        finish();
+
+
+                    }else if(respuesta.equals("no")){
+                        //PERMITE CREAR JUEGO O UNIRSE A UNO
+                        Intent intent_juego = new Intent(Perfil.this, Juego.class);
+                        startActivity(intent_juego);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        SharedPreferences prefs = getSharedPreferences("datos_session_login", Context.MODE_PRIVATE);
+        String rut_jugador_logeado = prefs.getString("rut_jugador_logeado", "");
+
+        Juegos consulta_juego_activo = new Juegos(rut_jugador_logeado,"http://146.66.99.89/~daemmulc/matlapp/juego/consultar_juego_jugador.php" ,consulta_juego_listener );
+        RequestQueue queue = Volley.newRequestQueue(Perfil.this);
+        queue.add(consulta_juego_activo);
     }
 }

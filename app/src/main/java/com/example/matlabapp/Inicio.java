@@ -31,15 +31,19 @@ public class Inicio extends AppCompatActivity {
 
 
 
+        cargarFuncionesMenu();
+
+    }
+
+    public void cargarFuncionesMenu(){
         //CODIGO PARA REDIRECCIONAR CON EL BORON_INSTRUCCIONES
         boton_instrucciones = findViewById(R.id.btn_instrucciones);
         boton_instrucciones.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                    Intent intent_instrucciones = new Intent(Inicio.this, Instrucciones.class);
-                    Inicio.this.startActivity(intent_instrucciones);
-
+                Intent intent_instrucciones = new Intent(Inicio.this, Instrucciones.class);
+                Inicio.this.startActivity(intent_instrucciones);
             }
         });
 
@@ -50,8 +54,8 @@ public class Inicio extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                    Intent intent_perfil = new Intent(Inicio.this, Perfil.class);
-                    Inicio.this.startActivity(intent_perfil);
+                Intent intent_perfil = new Intent(Inicio.this, Perfil.class);
+                Inicio.this.startActivity(intent_perfil);
 
             }
         });
@@ -78,12 +82,11 @@ public class Inicio extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                    Intent intent_ranking = new Intent(Inicio.this, Ranking.class);
-                    Inicio.this.startActivity(intent_ranking);
+                Intent intent_ranking = new Intent(Inicio.this, Ranking.class);
+                Inicio.this.startActivity(intent_ranking);
 
             }
         });
-
     }
 
     public Boolean consultar_jugador_logeado(){

@@ -1,6 +1,7 @@
 package com.example.matlabapp;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -10,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,6 +43,12 @@ public class Preguntarjetadesplegada extends AppCompatActivity {
     LinearLayout boton_alternativa_3;
     LinearLayout boton_alternativa_4;
 
+
+    Button boton_perfil;
+    Button boton_instrucciones;
+    Button boton_ranking;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +64,8 @@ public class Preguntarjetadesplegada extends AppCompatActivity {
 
         //asigna botones
         setearOnClickBotones();
+
+        cargarFuncionesMenu();
     }
 
     public void setearOnClickBotones(){
@@ -95,14 +105,20 @@ public class Preguntarjetadesplegada extends AppCompatActivity {
 
     public void responderPreguntarjeta(int alternativa){
 
+        int respuesta;
+
         if(alternativa_correcta==alternativa){
-
+            respuesta = 1;
         }else{
-
+            respuesta = 2;
         }
 
-        AlertDialog.Builder mensaje = new AlertDialog.Builder(Preguntarjetadesplegada.this);
-        mensaje.setMessage("SELECCIONA OPCION: "+alternativa).create().show();
+        Intent intent_respuesta = new Intent(Preguntarjetadesplegada.this, Respuestas.class);
+        intent_respuesta.putExtra("respuesta", respuesta);
+        intent_respuesta.putExtra("id_preguntarjeta", id_preguntarjeta);
+        this.startActivity(intent_respuesta);
+        finish();
+
 
     }
 
@@ -142,10 +158,8 @@ public class Preguntarjetadesplegada extends AppCompatActivity {
 
                     imagen_preguntarjeta.setImageBitmap(bitmap_imagen_recibida);
 
-                    AlertDialog.Builder mensaje = new AlertDialog.Builder(Preguntarjetadesplegada.this);
-                    mensaje.setMessage("hola id pregunta: "+id_imagen_recibida).create().show();
-
-
+//                    AlertDialog.Builder mensaje = new AlertDialog.Builder(Preguntarjetadesplegada.this);
+//                    mensaje.setMessage("hola id pregunta: "+id_imagen_recibida).create().show();
 
 
                 } catch (JSONException e) {
@@ -162,6 +176,120 @@ public class Preguntarjetadesplegada extends AppCompatActivity {
         Preguntarjetas consulta_preguntarjeta = new Preguntarjetas(curso_jugador_logeado,"http://146.66.99.89/~daemmulc/matlapp/preguntarjeta/solicitar_preguntarjeta.php" ,consulta_preguntarjeta_listener);
         RequestQueue queue = Volley.newRequestQueue(Preguntarjetadesplegada.this);
         queue.add(consulta_preguntarjeta);
+    }
+
+
+
+
+    public void cargarFuncionesMenu(){
+        //CODIGO PARA REDIRECCIONAR CON EL BORON_INSTRUCCIONES
+        boton_instrucciones = findViewById(R.id.btn_instrucciones);
+        boton_instrucciones.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent_instrucciones = new Intent(Preguntarjetadesplegada.this, Instrucciones.class);
+                Preguntarjetadesplegada.this.startActivity(intent_instrucciones);
+
+            }
+        });
+
+
+        //CODIGO PARA REDIRECCIONAR CON EL BOTON_PERFIL
+        boton_perfil = findViewById(R.id.btn_perfil);
+        boton_perfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent_perfil = new Intent(Preguntarjetadesplegada.this, Perfil.class);
+                Preguntarjetadesplegada.this.startActivity(intent_perfil);
+
+            }
+        });
+
+
+
+        //CODIGO PARA REDIRECCIONAR CON EL BOTON RANKING
+        boton_ranking = findViewById(R.id.btn_ranking);
+        boton_ranking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent_ranking = new Intent(Preguntarjetadesplegada.this, Ranking.class);
+                Preguntarjetadesplegada.this.startActivity(intent_ranking);
+
+            }
+        });
+    }
+
+
+
+    public Boolean consultar_jugador_logeado_menu(){
+        SharedPreferences prefs = getSharedPreferences("datos_session_login", Context.MODE_PRIVATE);
+        String rut_jugador_logeado = prefs.getString("rut_jugador_logeado", "");
+
+        if(rut_jugador_logeado.equals("")){
+            //NO ESTA LOGEADO
+            AlertDialog.Builder mensaje_login = new AlertDialog.Builder(Preguntarjetadesplegada.this);
+            mensaje_login.setPositiveButton("Ir a Perfil", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    Intent intent_perfil = new Intent(Preguntarjetadesplegada.this,Perfil.class);
+                    startActivity(intent_perfil);
+                }
+            });
+            mensaje_login.setMessage("INGRESA TUS DATOS PARA JUGAR").create().show();
+            return false;
+        }else{
+            //ESTA LOGEADO
+            return true;
+        }
+    }
+
+
+
+    public void juegoEnSession(int id_juego){
+        SharedPreferences preferencias = getSharedPreferences("datos_session_login",   Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferencias.edit();
+        editor.putInt("id_juego_activo" ,id_juego );
+        editor.commit();
+    }
+
+    public void consultar_juego_activo_jugador(){
+
+        Response.Listener<String> consulta_juego_listener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONObject respuestaJson = new JSONObject(response);
+                    String respuesta = respuestaJson.getString("juego_activo");
+
+                    if(respuesta.equals("si")){
+                        int id_juego = Integer.parseInt(respuestaJson.getString("id_juego"));
+
+                        juegoEnSession(id_juego);
+
+                        Intent intent_preguntarjeta = new Intent(Preguntarjetadesplegada.this, Preguntarjeta.class);
+                        Preguntarjetadesplegada.this.startActivity(intent_preguntarjeta);
+
+                    }else if(respuesta.equals("no")){
+                        //PERMITE CREAR JUEGO O UNIRSE A UNO
+                        Intent intent_juego = new Intent(Preguntarjetadesplegada.this, Juego.class);
+                        startActivity(intent_juego);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        SharedPreferences prefs = getSharedPreferences("datos_session_login", Context.MODE_PRIVATE);
+        String rut_jugador_logeado = prefs.getString("rut_jugador_logeado", "");
+
+        Juegos consulta_juego_activo = new Juegos(rut_jugador_logeado,"http://146.66.99.89/~daemmulc/matlapp/juego/consultar_juego_jugador.php" ,consulta_juego_listener );
+        RequestQueue queue = Volley.newRequestQueue(Preguntarjetadesplegada.this);
+        queue.add(consulta_juego_activo);
     }
 
 
