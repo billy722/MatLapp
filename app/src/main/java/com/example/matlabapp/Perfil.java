@@ -81,7 +81,6 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
                 try {
                     JSONObject respuestaJson = new JSONObject(response);
                     String respuesta = respuestaJson.getString("creado");
-//                    String respuesta_campos = respuestaJson.getString("campos");
 
 
 //                    AlertDialog.Builder alert_mensaje_prueba = new AlertDialog.Builder(Perfil.this);
@@ -89,7 +88,7 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
 
                     if(respuesta.equals("si")){
 
-                        logear_jugador(rut,nombre);
+                        logear_jugador(rut,nombre,curso);
 
                         AlertDialog.Builder alert_mensaje = new AlertDialog.Builder(Perfil.this);
                         alert_mensaje.setMessage("Jugador creado, ya puedes jugar¡").create().show();
@@ -153,13 +152,14 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
     }
 
 
-    public void logear_jugador(String rut_jugador, String nombre_jugador){
+    public void logear_jugador(String rut_jugador, String nombre_jugador, int curso_jugador){
         //CREA VARIABLES DE SESION
 
         SharedPreferences preferencias = getSharedPreferences("datos_session_login",   Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferencias.edit();
         editor.putString("rut_jugador_logeado" , rut_jugador);
         editor.putString("nombre_jugador_logeado" , nombre_jugador);
+        editor.putInt("curso_jugador_logeado" , curso_jugador);
         editor.commit();
 
         activar_desactivar_campos_texto(false);
@@ -183,10 +183,11 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
 
                         String rut_recibido = respuestaJson.getString("rut");
                         String nombre_recibido = respuestaJson.getString("nombre");
+                        int curso_recibido = respuestaJson.getInt("curso");
 
                         txt_nombre.setText(nombre_recibido);
 
-                        logear_jugador(rut_recibido,nombre_recibido);
+                        logear_jugador(rut_recibido,nombre_recibido,curso_recibido);
 
                         //mensaje en pantalla
                         AlertDialog.Builder alert_mensaje = new AlertDialog.Builder(Perfil.this);

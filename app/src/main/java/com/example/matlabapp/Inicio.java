@@ -103,7 +103,7 @@ public class Inicio extends AppCompatActivity {
               return false;
         }else{
             //ESTA LOGEADO
-             return true;
+            return true;
         }
     }
 
@@ -117,6 +117,7 @@ public class Inicio extends AppCompatActivity {
     }
 
     public void consultar_juego_activo_jugador(){
+
         Response.Listener<String> consulta_juego_listener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -125,13 +126,13 @@ public class Inicio extends AppCompatActivity {
                     JSONObject respuestaJson = new JSONObject(response);
                     String respuesta = respuestaJson.getString("juego_activo");
 
-
                     if(respuesta.equals("si")){
                         int id_juego = Integer.parseInt(respuestaJson.getString("id_juego"));
+
                         juegoEnSession(id_juego);
 
                         Intent intent_preguntarjeta = new Intent(Inicio.this, Preguntarjeta.class);
-                        startActivity(intent_preguntarjeta);
+                        Inicio.this.startActivity(intent_preguntarjeta);
 
                     }else if(respuesta.equals("no")){
                         //PERMITE CREAR JUEGO O UNIRSE A UNO
