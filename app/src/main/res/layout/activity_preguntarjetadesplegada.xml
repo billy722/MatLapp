@@ -4,8 +4,218 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/despliegue_pantalla_fondo"
-    tools:context=".Preguntarjetadesplegada">
+    android:background="@drawable/preguntarjetadesplegada_fondo"
+    tools:context=".Preguntarjetadesplegada"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="90dp">
+
+
+            <ImageView
+                android:id="@+id/imagen_preguntarjeta"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/cuadro_cargando"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="300dp"
+        >
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="50"
+                        android:orientation="horizontal"
+                        >
+
+                        <LinearLayout
+                            android:id="@+id/boton_alternativa_1"
+                            android:layout_width="0dp"
+                            android:layout_weight="50"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/cuadrado">
+
+                            <TextView
+                                android:id="@+id/txt_alternativa_1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="52sp"
+                                android:layout_marginTop="15sp"
+                                android:fontFamily="@font/pt_sans"
+                                android:text="..."
+                                android:textSize="23dp"
+                                android:textStyle="bold" />
+                       </LinearLayout>
+
+                       <LinearLayout
+                           android:id="@+id/boton_alternativa_2"
+                           android:layout_width="0dp"
+                           android:layout_weight="50"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/hexagono">
+
+                           <TextView
+                               android:id="@+id/txt_alternativa_2"
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content"
+                               android:layout_marginStart="52sp"
+                               android:layout_marginTop="15sp"
+                               android:fontFamily="@font/pt_sans"
+                               android:text="..."
+                               android:textSize="23dp"
+                               android:textStyle="bold" />
+
+                       </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="50"
+                        android:orientation="horizontal"
+                        >
+
+                        <LinearLayout
+                            android:id="@+id/boton_alternativa_3"
+                            android:layout_width="0dp"
+                            android:layout_weight="50"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/circulo" >
+
+                            <TextView
+                                android:id="@+id/txt_alternativa_3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="52sp"
+                                android:layout_marginTop="15sp"
+                                android:fontFamily="@font/pt_sans"
+                                android:text="..."
+                                android:textSize="23dp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/boton_alternativa_4"
+                            android:layout_width="0dp"
+                            android:layout_weight="50"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/triangulo" >
+
+                            <TextView
+                                android:id="@+id/txt_alternativa_4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="52sp"
+                                android:layout_marginTop="15sp"
+                                android:fontFamily="@font/pt_sans"
+                                android:text="..."
+                                android:textSize="23dp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+            </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="21dp"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            >
+
+            <Button
+                android:id="@+id/btn_instrucciones"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="50dp"
+                android:background="@drawable/icono_instrucciones"
+                style="?android:attr/buttonBarButtonStyle"/>
+
+            <Button
+                android:id="@+id/btn_perfil"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/icono_perfil" />
+
+            <Button
+                android:id="@+id/btn_preguntarjetas"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/icono_preguntarjeta" />
+
+            <Button
+                android:id="@+id/btn_ranking"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/icono_ranking" />
+
+            <Button
+                android:id="@+id/btn_volver"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/icono_volver" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 
 
 

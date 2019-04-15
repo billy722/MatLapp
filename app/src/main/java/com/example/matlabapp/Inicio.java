@@ -31,15 +31,19 @@ public class Inicio extends AppCompatActivity {
 
 
 
+        cargarFuncionesMenu();
+
+    }
+
+    public void cargarFuncionesMenu(){
         //CODIGO PARA REDIRECCIONAR CON EL BORON_INSTRUCCIONES
         boton_instrucciones = findViewById(R.id.btn_instrucciones);
         boton_instrucciones.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                    Intent intent_instrucciones = new Intent(Inicio.this, Instrucciones.class);
-                    Inicio.this.startActivity(intent_instrucciones);
-
+                Intent intent_instrucciones = new Intent(Inicio.this, Instrucciones.class);
+                Inicio.this.startActivity(intent_instrucciones);
             }
         });
 
@@ -50,8 +54,8 @@ public class Inicio extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                    Intent intent_perfil = new Intent(Inicio.this, Perfil.class);
-                    Inicio.this.startActivity(intent_perfil);
+                Intent intent_perfil = new Intent(Inicio.this, Perfil.class);
+                Inicio.this.startActivity(intent_perfil);
 
             }
         });
@@ -78,12 +82,11 @@ public class Inicio extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                    Intent intent_ranking = new Intent(Inicio.this, Ranking.class);
-                    Inicio.this.startActivity(intent_ranking);
+                Intent intent_ranking = new Intent(Inicio.this, Ranking.class);
+                Inicio.this.startActivity(intent_ranking);
 
             }
         });
-
     }
 
     public Boolean consultar_jugador_logeado(){
@@ -103,7 +106,7 @@ public class Inicio extends AppCompatActivity {
               return false;
         }else{
             //ESTA LOGEADO
-             return true;
+            return true;
         }
     }
 
@@ -117,6 +120,7 @@ public class Inicio extends AppCompatActivity {
     }
 
     public void consultar_juego_activo_jugador(){
+
         Response.Listener<String> consulta_juego_listener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -125,13 +129,13 @@ public class Inicio extends AppCompatActivity {
                     JSONObject respuestaJson = new JSONObject(response);
                     String respuesta = respuestaJson.getString("juego_activo");
 
-
                     if(respuesta.equals("si")){
                         int id_juego = Integer.parseInt(respuestaJson.getString("id_juego"));
+
                         juegoEnSession(id_juego);
 
                         Intent intent_preguntarjeta = new Intent(Inicio.this, Preguntarjeta.class);
-                        startActivity(intent_preguntarjeta);
+                        Inicio.this.startActivity(intent_preguntarjeta);
 
                     }else if(respuesta.equals("no")){
                         //PERMITE CREAR JUEGO O UNIRSE A UNO
