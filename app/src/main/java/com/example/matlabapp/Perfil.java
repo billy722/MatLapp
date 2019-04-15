@@ -103,8 +103,6 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
                         AlertDialog.Builder alert_mensaje = new AlertDialog.Builder(Perfil.this);
                         alert_mensaje.setMessage("Jugador creado, ya puedes jugar¡").create().show();
 
-                        Intent intent_inicio = new Intent(Perfil.this, Inicio.class);
-                        Perfil.this.startActivity(intent_inicio);
 
                     }else if(respuesta.equals("no")){
                         AlertDialog.Builder alert_mensaje = new AlertDialog.Builder(Perfil.this);
@@ -176,6 +174,9 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
         editor.commit();
 
         activar_desactivar_campos_texto(false);
+
+        Intent intent_inicio = new Intent(Perfil.this, Inicio.class);
+        Perfil.this.startActivity(intent_inicio);
     }
 
     public void consulta_jugador_existe(){
