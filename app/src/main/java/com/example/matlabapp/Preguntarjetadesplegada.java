@@ -44,10 +44,6 @@ public class Preguntarjetadesplegada extends AppCompatActivity {
     LinearLayout boton_alternativa_4;
 
 
-    Button boton_perfil;
-    Button boton_instrucciones;
-    Button boton_ranking;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +61,15 @@ public class Preguntarjetadesplegada extends AppCompatActivity {
         //asigna botones
         setearOnClickBotones();
 
-        cargarFuncionesMenu();
+//        cargarFuncionesMenu();
     }
+
+
+    @Override
+    public void onBackPressed (){
+
+    }
+
 
     public void setearOnClickBotones(){
         boton_alternativa_1 = findViewById(R.id.boton_alternativa_1);
@@ -77,24 +80,32 @@ public class Preguntarjetadesplegada extends AppCompatActivity {
         boton_alternativa_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boton_alternativa_1.setClickable(false);
+                txt_alternativa_1.setText("Cargando...");
                 responderPreguntarjeta(1);
             }
         });
         boton_alternativa_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boton_alternativa_2.setClickable(false);
+                txt_alternativa_2.setText("Cargando...");
                 responderPreguntarjeta(2);
             }
         });
         boton_alternativa_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boton_alternativa_3.setClickable(false);
+                txt_alternativa_3.setText("Cargando...");
                 responderPreguntarjeta(3);
             }
         });
         boton_alternativa_4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boton_alternativa_4.setClickable(false);
+                txt_alternativa_4.setText("Cargando...");
                 responderPreguntarjeta(4);
             }
         });
@@ -173,7 +184,7 @@ public class Preguntarjetadesplegada extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("datos_session_login", Context.MODE_PRIVATE);
         int curso_jugador_logeado = prefs.getInt("curso_jugador_logeado", 0);
 
-        Preguntarjetas consulta_preguntarjeta = new Preguntarjetas(curso_jugador_logeado,"http://146.66.99.89/~daemmulc/matlapp/preguntarjeta/solicitar_preguntarjeta.php" ,consulta_preguntarjeta_listener);
+        Preguntarjetas consulta_preguntarjeta = new Preguntarjetas(curso_jugador_logeado,"http://www.matlapp.cl/matlapp_app/preguntarjeta/solicitar_preguntarjeta.php" ,consulta_preguntarjeta_listener);
         RequestQueue queue = Volley.newRequestQueue(Preguntarjetadesplegada.this);
         queue.add(consulta_preguntarjeta);
     }
@@ -181,46 +192,6 @@ public class Preguntarjetadesplegada extends AppCompatActivity {
 
 
 
-    public void cargarFuncionesMenu(){
-        //CODIGO PARA REDIRECCIONAR CON EL BORON_INSTRUCCIONES
-        boton_instrucciones = findViewById(R.id.btn_instrucciones);
-        boton_instrucciones.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent_instrucciones = new Intent(Preguntarjetadesplegada.this, Instrucciones.class);
-                Preguntarjetadesplegada.this.startActivity(intent_instrucciones);
-
-            }
-        });
-
-
-        //CODIGO PARA REDIRECCIONAR CON EL BOTON_PERFIL
-        boton_perfil = findViewById(R.id.btn_perfil);
-        boton_perfil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent_perfil = new Intent(Preguntarjetadesplegada.this, Perfil.class);
-                Preguntarjetadesplegada.this.startActivity(intent_perfil);
-
-            }
-        });
-
-
-
-        //CODIGO PARA REDIRECCIONAR CON EL BOTON RANKING
-        boton_ranking = findViewById(R.id.btn_ranking);
-        boton_ranking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent_ranking = new Intent(Preguntarjetadesplegada.this, Ranking.class);
-                Preguntarjetadesplegada.this.startActivity(intent_ranking);
-
-            }
-        });
-    }
 
 
 
@@ -287,7 +258,7 @@ public class Preguntarjetadesplegada extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("datos_session_login", Context.MODE_PRIVATE);
         String rut_jugador_logeado = prefs.getString("rut_jugador_logeado", "");
 
-        Juegos consulta_juego_activo = new Juegos(rut_jugador_logeado,"http://146.66.99.89/~daemmulc/matlapp/juego/consultar_juego_jugador.php" ,consulta_juego_listener );
+        Juegos consulta_juego_activo = new Juegos(rut_jugador_logeado,"http://www.matlapp.cl/matlapp_app/juego/consultar_juego_jugador.php" ,consulta_juego_listener );
         RequestQueue queue = Volley.newRequestQueue(Preguntarjetadesplegada.this);
         queue.add(consulta_juego_activo);
     }

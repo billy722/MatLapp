@@ -19,6 +19,22 @@ public class Juegos extends StringRequest {
         parametros.put("rut",jugador);
     }
 
+  public Juegos(int id_juego, String jugador,String url, Response.Listener<String> listener) {
+        super(Method.POST, url, listener,null);
+
+
+        parametros = new HashMap<>();
+        parametros.put("id_juego",String.valueOf(id_juego));
+        parametros.put("rut",jugador);
+    }
+
+  public Juegos(int id_juego, String url, Response.Listener<String> listener) {
+        super(Method.POST, url, listener,null);
+
+        parametros = new HashMap<>();
+        parametros.put("id_juego",String.valueOf(id_juego));
+    }
+
 
 
     @Override

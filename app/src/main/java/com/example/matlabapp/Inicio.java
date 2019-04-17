@@ -112,10 +112,11 @@ public class Inicio extends AppCompatActivity {
 
 
 
-    public void juegoEnSession(int id_juego){
+    public void juegoEnSession(int id_juego, String jugador_creador){
         SharedPreferences preferencias = getSharedPreferences("datos_session_login",   Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferencias.edit();
         editor.putInt("id_juego_activo" ,id_juego );
+        editor.putString("jugador_creador" ,jugador_creador );
         editor.commit();
     }
 
@@ -131,8 +132,10 @@ public class Inicio extends AppCompatActivity {
 
                     if(respuesta.equals("si")){
                         int id_juego = Integer.parseInt(respuestaJson.getString("id_juego"));
+                        String jugador_creador = respuestaJson.getString("jugador_creador");
 
-                        juegoEnSession(id_juego);
+
+                        juegoEnSession(id_juego,jugador_creador);
 
                         Intent intent_preguntarjeta = new Intent(Inicio.this, Preguntarjeta.class);
                         Inicio.this.startActivity(intent_preguntarjeta);
@@ -152,7 +155,7 @@ public class Inicio extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("datos_session_login", Context.MODE_PRIVATE);
         String rut_jugador_logeado = prefs.getString("rut_jugador_logeado", "");
 
-        Juegos consulta_juego_activo = new Juegos(rut_jugador_logeado,"http://146.66.99.89/~daemmulc/matlapp/juego/consultar_juego_jugador.php" ,consulta_juego_listener );
+        Juegos consulta_juego_activo = new Juegos(rut_jugador_logeado,"http://www.matlapp.cl/matlapp_app/juego/consultar_juego_jugador.php" ,consulta_juego_listener );
         RequestQueue queue = Volley.newRequestQueue(Inicio.this);
         queue.add(consulta_juego_activo);
     }

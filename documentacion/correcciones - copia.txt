@@ -1,18 +1,9 @@
--agregar mensaje cargando.
-- una vez logeado, devolver al inicio
-
--boton finalizar juego.
 
 -desactivar volver en preguntarjetadesplegada.
--quitar menu en preguntarjeta desplegada.
 
 -poner pagina de salida con creditos por las tarjetas.
 
 - mostrar listado de Preguntas ordenadas con mayor complejidad de un juego determinado:
-
--Permitir cambiar curso en perfil.(actualizar variable de sesion)
-
--Agregar Excepcions para errores.
 
 -ranking: respuestas correctas - incorrectas.
 

@@ -147,7 +147,7 @@ public class Ranking extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("datos_session_login", Context.MODE_PRIVATE);
         String rut_jugador_logeado = prefs.getString("rut_jugador_logeado", "");
 
-        Juegos consulta_juego_activo = new Juegos(rut_jugador_logeado,"http://146.66.99.89/~daemmulc/matlapp/juego/consultar_juego_jugador.php" ,consulta_juego_listener );
+        Juegos consulta_juego_activo = new Juegos(rut_jugador_logeado,"http://www.matlapp.cl/matlapp_app/juego/consultar_juego_jugador.php" ,consulta_juego_listener );
         RequestQueue queue = Volley.newRequestQueue(Ranking.this);
         queue.add(consulta_juego_activo);
     }

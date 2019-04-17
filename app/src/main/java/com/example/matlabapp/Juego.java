@@ -30,7 +30,6 @@ public class Juego extends AppCompatActivity {
 
     Button boton_perfil;
     Button boton_instrucciones;
-    Button boton_preguntarjeta;
     Button boton_ranking;
 
 
@@ -80,37 +79,49 @@ public class Juego extends AppCompatActivity {
 
     }
 
-    public void juegoEnSession(int id_juego){
+    public void juegoEnSession(int id_juego, String jugador_creador){
         SharedPreferences preferencias = getSharedPreferences("datos_session_login",   Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferencias.edit();
-        editor.putInt("id_juego_activo" ,id_juego );
+        editor.putInt("id_juego_activo" ,id_juego);
+        editor.putString("jugador_creador" ,jugador_creador);
         editor.commit();
     }
 
     public void unirse_juego(){
 
+        btn_aceptar_unirme.setText("Cargando...");
+        btn_aceptar_unirme.setClickable(false);
 
-        Response.Listener<String> consulta_nuevo_juego_listener = new Response.Listener<String>() {
+        Response.Listener<String> consulta_unirse_juego_listener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
                 try {
                     JSONObject respuestaJson = new JSONObject(response);
-                    String respuesta = respuestaJson.getString("creado");
-                    int id_juego = respuestaJson.getInt("id_juego_creado");
+                    String respuesta = respuestaJson.getString("juego_existe");
 
 
-                    if(respuesta.equals("si")){
+                    if(respuesta.equals("si") || respuesta.equals("duplicado")){
+                        String jugador_creador = respuestaJson.getString("jugador_creador");
 
+                        juegoEnSession(Integer.parseInt(txt_codigo_juego_unirme.getText().toString()),jugador_creador);
 
                         Intent intent_preguntarjeta = new Intent(Juego.this, Preguntarjeta.class);
                         startActivity(intent_preguntarjeta);
+                        finish();
 
-                        juegoEnSession(id_juego);
+                        btn_aceptar_unirme.setText("UNIRME");
+                        btn_aceptar_unirme.setClickable(true);
 
 
                     }else if(respuesta.equals("no")){
-                        //PERMITE CREAR JUEGO O UNIRSE A UNO
+                        //JUEGO NO EXISTE
+                        AlertDialog.Builder mensaje1 = new AlertDialog.Builder(Juego.this);
+                        mensaje1.setMessage("EL JUEGO INGRESADO NO EXISTE").create().show();
+
+                        btn_aceptar_unirme.setText("UNIRME");
+                        btn_aceptar_unirme.setClickable(true);
+
                     }
 
                 } catch (JSONException e) {
@@ -124,14 +135,19 @@ public class Juego extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("datos_session_login", Context.MODE_PRIVATE);
         String rut_jugador_logeado = prefs.getString("rut_jugador_logeado", "");
 
-        Jugador consulta_nuevo_juego = new Jugador(rut_jugador_logeado,"http://146.66.99.89/~daemmulc/matlapp/juego/crear_juego.php" ,consulta_nuevo_juego_listener );
+        Juegos consulta_juego_existe = new Juegos(Integer.parseInt(txt_codigo_juego_unirme.getText().toString()),rut_jugador_logeado,"http://www.matlapp.cl/matlapp_app/juego/consultar_juego_existe.php" ,consulta_unirse_juego_listener );
         RequestQueue queue = Volley.newRequestQueue(Juego.this);
-        queue.add(consulta_nuevo_juego);
+        queue.add(consulta_juego_existe);
     }
 
 
     public void crear_nuevo_juego(){
 
+        btn_nuevo_juego.setText("Cargando...");
+        btn_nuevo_juego.setClickable(false);
+
+        SharedPreferences prefs = getSharedPreferences("datos_session_login", Context.MODE_PRIVATE);
+        final String rut_jugador_logeado = prefs.getString("rut_jugador_logeado", "");
 
         Response.Listener<String> consulta_nuevo_juego_listener = new Response.Listener<String>() {
             @Override
@@ -145,29 +161,35 @@ public class Juego extends AppCompatActivity {
 
                     if(respuesta.equals("si")){
 
+                        juegoEnSession(id_juego,rut_jugador_logeado);
+
 
                         Intent intent_preguntarjeta = new Intent(Juego.this, Preguntarjeta.class);
                         startActivity(intent_preguntarjeta);
+                        finish();
 
-                        juegoEnSession(id_juego);
 
 
                     }else if(respuesta.equals("no")){
                         //PERMITE CREAR JUEGO O UNIRSE A UNO
+                        btn_nuevo_juego.setText("CREAR JUEGO");
+                        btn_nuevo_juego.setClickable(true);
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                     AlertDialog.Builder mensaje1 = new AlertDialog.Builder(Juego.this);
                     mensaje1.setMessage("que paso : "+e.getMessage()).create().show();
+
+                    btn_nuevo_juego.setText("CREAR JUEGO");
+                    btn_nuevo_juego.setClickable(true);
                 }
             }
         };
 
-        SharedPreferences prefs = getSharedPreferences("datos_session_login", Context.MODE_PRIVATE);
-        String rut_jugador_logeado = prefs.getString("rut_jugador_logeado", "");
 
-        Jugador consulta_nuevo_juego = new Jugador(rut_jugador_logeado,"http://146.66.99.89/~daemmulc/matlapp/juego/crear_juego.php" ,consulta_nuevo_juego_listener );
+
+        Jugador consulta_nuevo_juego = new Jugador(rut_jugador_logeado,"http://www.matlapp.cl/matlapp_app/juego/crear_juego.php" ,consulta_nuevo_juego_listener );
         RequestQueue queue = Volley.newRequestQueue(Juego.this);
         queue.add(consulta_nuevo_juego);
     }

@@ -16,29 +16,31 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:paddingLeft="60dp"
-            android:paddingRight="60dp"
+            android:paddingLeft="100dp"
+            android:paddingRight="100dp"
             android:orientation="vertical"
             >
 
             <TextView
                 android:id="@+id/txt_titulo_juego"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:fontFamily="@font/pt_sans"
                 android:text="Primero debes estar en un Juego"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="18sp"
+                android:textSize="35sp"
                 android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btn_nuevo_juego"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#5225A5"
+                android:background="@drawable/fondo_boton"
                 android:fontFamily="@font/pt_sans"
                 android:text="Crear Juego"
+                android:textColor="#000000"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -56,13 +58,15 @@
                 android:layout_height="wrap_content"
                 android:text="Unirme a un Juego"
                 android:textStyle="bold"
-                android:background="#5225A5"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                android:background="@drawable/fondo_boton"
                 android:fontFamily="@font/pt_sans"/>
 
             <EditText
                 android:id="@+id/txt_codigo_juego_unirme"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="80dp"
                 android:ems="10"
                 android:inputType="number"
                 android:background="@drawable/campo_texto"
@@ -70,19 +74,23 @@
                 android:hint="Codigo de juego"
                 android:fontFamily="@font/pt_sans"
                 android:textColorHint="#E2000005"
-                android:visibility="invisible"/>
+                android:textColor="#000000"
+                android:visibility="invisible"
+                android:textSize="30sp"
+
+                />
 
             <Button
                 android:id="@+id/btn_aceptar_unirme"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#FBE70A"
+                android:layout_height="80dp"
                 android:fontFamily="@font/pt_sans"
                 android:text="Unirme"
                 android:textColor="#000000"
                 android:textFontWeight="bold"
                 android:textSize="14sp"
                 android:textStyle="bold"
+                android:background="@drawable/fondo_boton"
                 android:visibility="invisible"/>
 
         </LinearLayout>
@@ -92,25 +100,24 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="57dp"
+            android:layout_marginBottom="109dp"
             android:orientation="horizontal"
             android:gravity="center_horizontal"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="54dp"
+            android:layout_marginEnd="54dp"
             >
 
             <Button
                 android:id="@+id/btn_instrucciones"
                 android:layout_width="0dp"
                 android:layout_weight="2"
-                android:layout_height="50dp"
+                android:layout_height="100dp"
                 android:background="@drawable/icono_instrucciones"
                 style="?android:attr/buttonBarButtonStyle"/>
 
@@ -119,7 +126,7 @@
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_weight="2"
-                android:layout_height="50dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="20dp"
                 android:background="@drawable/icono_perfil" />
 
@@ -128,7 +135,7 @@
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_weight="2"
-                android:layout_height="50dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="20dp"
                 android:background="@drawable/icono_preguntarjeta" />
 
@@ -137,7 +144,7 @@
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_weight="2"
-                android:layout_height="50dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="20dp"
                 android:background="@drawable/icono_ranking" />
 
@@ -146,7 +153,7 @@
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_weight="2"
-                android:layout_height="50dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="20dp"
                 android:background="@drawable/icono_volver" />
 

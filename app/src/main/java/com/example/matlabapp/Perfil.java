@@ -72,8 +72,10 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
             //ESTA LOGEADO
             activar_desactivar_campos_texto(false);
             String nombre_jugador = prefs.getString("nombre_jugador_logeado", "");
+            int curso_jugador = prefs.getInt("curso_jugador_logeado", 0);
             txt_rut.setText(rut_jugador_logeado);
             txt_nombre.setText(nombre_jugador);
+            selector_cursos.setSelection(curso_jugador-1);
         }
     }
 
@@ -115,7 +117,7 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
             }
         };
 
-        Jugador registro = new Jugador(rut, nombre, curso,"http://146.66.99.89/~daemmulc/matlapp/perfil/crear_jugador.php" ,loginListenter);
+        Jugador registro = new Jugador(rut, nombre, curso,"http://www.matlapp.cl/matlapp_app/perfil/crear_jugador.php" ,loginListenter);
         RequestQueue queue = Volley.newRequestQueue(Perfil.this);
         queue.add(registro);
 
@@ -175,8 +177,8 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
 
         activar_desactivar_campos_texto(false);
 
-        Intent intent_inicio = new Intent(Perfil.this, Inicio.class);
-        Perfil.this.startActivity(intent_inicio);
+//        Intent intent_inicio = new Intent(Perfil.this, Inicio.class);
+//        Perfil.this.startActivity(intent_inicio);
     }
 
     public void consulta_jugador_existe(){
@@ -184,6 +186,8 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
         final String rut = txt_rut.getText().toString();
         final String nombre = txt_rut.getText().toString();
         final int curso = Integer.parseInt(txt_rut.getText().toString());
+
+        txt_nombre.setText("Cargando...");
 
         Response.Listener<String> loginListenter = new Response.Listener<String>() {
             @Override
@@ -200,6 +204,7 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
                         int curso_recibido = respuestaJson.getInt("curso");
 
                         txt_nombre.setText(nombre_recibido);
+                        selector_cursos.setSelection(curso_recibido-1);
 
                         logear_jugador(rut_recibido,nombre_recibido,curso_recibido);
 
@@ -210,9 +215,9 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
 
                     }else if(respuesta.equals("no")){
 
-                        AlertDialog.Builder alert_mensaje = new AlertDialog.Builder(Perfil.this);
-                        alert_mensaje.setMessage("NO ESTA REGISTRADO").create().show();
-
+//                        AlertDialog.Builder alert_mensaje = new AlertDialog.Builder(Perfil.this);
+//                        alert_mensaje.setMessage("NO ESTA REGISTRADO").create().show();
+                        txt_nombre.setText("");
                         activar_desactivar_campos_texto(true);
 
 
@@ -224,7 +229,7 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
             }
         };
 
-        Jugador login = new Jugador(rut, nombre, curso,"http://146.66.99.89/~daemmulc/matlapp/perfil/login.php" ,loginListenter);
+        Jugador login = new Jugador(rut, nombre, curso,"http://www.matlapp.cl/matlapp_app/perfil/login.php" ,loginListenter);
         RequestQueue queue = Volley.newRequestQueue(Perfil.this);
         queue.add(login);
     }
@@ -313,10 +318,11 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
 
 
 
-    public void juegoEnSession(int id_juego){
+    public void juegoEnSession(int id_juego, String jugador_creador){
         SharedPreferences preferencias = getSharedPreferences("datos_session_login",   Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferencias.edit();
         editor.putInt("id_juego_activo" ,id_juego );
+        editor.putString("jugador_creador" ,jugador_creador );
         editor.commit();
     }
 
@@ -332,13 +338,14 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
 
                     if(respuesta.equals("si")){
                         int id_juego = Integer.parseInt(respuestaJson.getString("id_juego"));
+                        String jugador_creador = respuestaJson.getString("jugador_creador");
 
-                        juegoEnSession(id_juego);
+
+                        juegoEnSession(id_juego,jugador_creador);
 
                         Intent intent_preguntarjeta = new Intent(Perfil.this, Preguntarjeta.class);
                         Perfil.this.startActivity(intent_preguntarjeta);
                         finish();
-
 
                     }else if(respuesta.equals("no")){
                         //PERMITE CREAR JUEGO O UNIRSE A UNO
@@ -355,7 +362,7 @@ public class Perfil extends AppCompatActivity implements View.OnFocusChangeListe
         SharedPreferences prefs = getSharedPreferences("datos_session_login", Context.MODE_PRIVATE);
         String rut_jugador_logeado = prefs.getString("rut_jugador_logeado", "");
 
-        Juegos consulta_juego_activo = new Juegos(rut_jugador_logeado,"http://146.66.99.89/~daemmulc/matlapp/juego/consultar_juego_jugador.php" ,consulta_juego_listener );
+        Juegos consulta_juego_activo = new Juegos(rut_jugador_logeado,"http://www.matlapp.cl/matlapp_app/juego/consultar_juego_jugador.php" ,consulta_juego_listener );
         RequestQueue queue = Volley.newRequestQueue(Perfil.this);
         queue.add(consulta_juego_activo);
     }

@@ -16,25 +16,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="60dp"
-            android:paddingRight="60dp"
+            android:paddingLeft="100dp"
+            android:paddingRight="100dp"
             android:gravity="center"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
-                android:layout_height="29dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/pt_sans"
                 android:text="Rut Jugador/a"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
 
             <EditText
                 android:id="@+id/txt_rut_jugador"
                 android:layout_width="match_parent"
-                android:layout_height="38dp"
+                android:layout_height="70dp"
                 android:background="@drawable/campo_texto"
                 android:fontFamily="@font/pt_sans"
                 android:inputType="number"
@@ -42,52 +45,59 @@
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:hint="Ingresa tu Rut"
-                android:textColor="#000000"/>
+                android:textColor="#000000"
+                android:textSize="35sp"/>
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
-                android:layout_height="29dp"
+                android:layout_height="45dp"
+                android:fontFamily="@font/pt_sans"
                 android:text="Nombre "
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
 
             <EditText
                 android:id="@+id/txt_nombre_jugador"
                 android:layout_width="match_parent"
-                android:layout_height="38dp"
+                android:layout_height="70dp"
                 android:background="@drawable/campo_texto"
                 android:fontFamily="@font/pt_sans"
                 android:inputType="text"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:hint="Ingresa tu nombre"
-                android:textColor="#000000"/>
+                android:textColor="#000000"
+                android:textSize="35sp"/>
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
-                android:layout_height="29dp"
+                android:layout_height="40dp"
+                android:fontFamily="@font/pt_sans"
                 android:text="Curso"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
 
             <Spinner
                 android:id="@+id/select_curso"
                 android:layout_width="match_parent"
-                android:layout_height="38dp"
-                android:fontFamily="@font/pt_sans">
+                android:layout_height="90dp"
+                android:fontFamily="@font/pt_sans"
+                android:textSize="40dp">
 
             </Spinner>
 
             <TextView
                 android:id="@+id/txthola"
                 android:layout_width="match_parent"
-                android:layout_height="29dp"
+                android:layout_height="40dp"
                 android:text=""
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
@@ -95,11 +105,14 @@
 
             <Button
                 android:id="@+id/btn_aceptar_login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@drawable/fondo_boton"
+                android:fontFamily="@font/pt_sans"
                 android:text="ACEPTAR"
-                android:textStyle="bold"
-                android:background="#5225A5"/>
+                android:textColor="#000000"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
 
         </LinearLayout>
@@ -116,18 +129,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="57dp"
+            android:layout_marginBottom="109dp"
             android:orientation="horizontal"
             android:gravity="center_horizontal"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="54dp"
+            android:layout_marginEnd="54dp"
             >
 
             <Button
                 android:id="@+id/btn_instrucciones"
                 android:layout_width="0dp"
                 android:layout_weight="2"
-                android:layout_height="50dp"
+                android:layout_height="100dp"
                 android:background="@drawable/icono_instrucciones"
                 style="?android:attr/buttonBarButtonStyle"/>
 
@@ -136,7 +149,7 @@
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_weight="2"
-                android:layout_height="50dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="20dp"
                 android:background="@drawable/icono_perfil" />
 
@@ -145,7 +158,7 @@
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_weight="2"
-                android:layout_height="50dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="20dp"
                 android:background="@drawable/icono_preguntarjeta" />
 
@@ -154,7 +167,7 @@
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_weight="2"
-                android:layout_height="50dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="20dp"
                 android:background="@drawable/icono_ranking" />
 
@@ -163,7 +176,7 @@
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_weight="2"
-                android:layout_height="50dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="20dp"
                 android:background="@drawable/icono_volver" />
 
