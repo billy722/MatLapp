@@ -29,6 +29,7 @@ public class Preguntarjeta extends AppCompatActivity {
     Button boton_perfil;
     Button boton_instrucciones;
     Button boton_ranking;
+    Button btn_volver;
 
     int id_juego_activo;
 
@@ -174,6 +175,15 @@ public class Preguntarjeta extends AppCompatActivity {
                 Preguntarjeta.this.startActivity(intent_ranking);
                 finish();
 
+            }
+        });
+
+        //CODIGO PARA REDIRECCIONAR CON EL BOTON ATRAS
+        btn_volver = findViewById(R.id.btn_volver);
+        btn_volver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Preguntarjeta.super.onBackPressed();
             }
         });
     }

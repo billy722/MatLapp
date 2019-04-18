@@ -5,7 +5,83 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Ranking"
+    android:orientation="vertical"
     android:background="@drawable/ranking_fondo">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1000dp"
+        android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:orientation="vertical"
+                android:layout_marginStart="200dp"
+                android:layout_marginTop="521dp"
+                >
+
+                <TextView
+                    android:id="@+id/txt_primer"
+                    android:text="..."
+                    android:textColor="#ffffff"
+                    android:textSize="40sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="52sp"
+                    android:layout_marginEnd="80dp"
+
+                    />
+                <TextView
+                    android:id="@+id/txt_segundo"
+                    android:text="..."
+                    android:textColor="#ffffff"
+                    android:textSize="40sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50sp"
+                    android:layout_marginTop="33dp"
+                    android:layout_marginEnd="100dp"
+
+                    />
+                <TextView
+                    android:id="@+id/txt_tercero"
+                    android:text="..."
+                    android:textColor="#ffffff"
+                    android:textSize="40sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50sp"
+                    android:layout_marginTop="29dp"
+                    android:layout_marginEnd="120dp"
+
+                    />
+                <TextView
+                    android:id="@+id/txt_cuarto"
+                    android:text="..."
+                    android:textColor="#ffffff"
+                    android:textSize="40sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50sp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="140dp"
+
+                    />
+                <TextView
+                    android:id="@+id/txt_quinto"
+                    android:text="..."
+                    android:textColor="#ffffff"
+                    android:textSize="40sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_marginTop="27dp"
+                    android:layout_marginEnd="170dp"
+
+                    />
+
+
+
+            </LinearLayout>
+    </LinearLayout>
 
 
     <LinearLayout

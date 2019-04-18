@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
 import android.support.annotation.DrawableRes;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -28,8 +29,10 @@ import org.json.JSONObject;
 public class Respuestas extends AppCompatActivity {
 
     ImageView imagen_respuesta;
+    Button btn_seguir_jugando;
     int id_preguntarjeta;
 
+    public MediaPlayer sonido;
 
     Button boton_perfil;
     Button boton_instrucciones;
@@ -52,7 +55,15 @@ public class Respuestas extends AppCompatActivity {
 
         cargarFuncionesMenu();
 
-
+        btn_seguir_jugando = findViewById(R.id.btn_seguir_jugando);
+        btn_seguir_jugando.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(consultar_jugador_logeado()) {
+                    consultar_juego_activo_jugador();
+                }
+            }
+        });
     }
 
 
@@ -135,8 +146,15 @@ public class Respuestas extends AppCompatActivity {
 
         if(respuesta==1){
             imagen_respuesta.setBackgroundResource(R.drawable.respuesta_correcta);
+            sonido = MediaPlayer.create(Respuestas.this,R.raw.correcto);
+            sonido.start();
+
         }else{
             imagen_respuesta.setBackgroundResource(R.drawable.respuesta_incorrecta);
+            sonido = MediaPlayer.create(Respuestas.this,R.raw.error);
+            sonido.start();
+
+            btn_seguir_jugando.setText("Esperar otro turno");
         }
 
 

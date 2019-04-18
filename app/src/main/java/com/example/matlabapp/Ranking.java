@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -23,6 +24,13 @@ public class Ranking extends AppCompatActivity {
     Button boton_perfil;
     Button boton_instrucciones;
     Button boton_preguntarjeta;
+    Button btn_volver;
+
+    TextView txt_primer;
+    TextView txt_segundo;
+    TextView txt_tercero;
+    TextView txt_cuarto;
+    TextView txt_quinto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +38,73 @@ public class Ranking extends AppCompatActivity {
         setContentView(R.layout.activity_ranking);
 
         cargarFuncionesMenu();
+        consultar_datos_jugador_logeado();
 
+
+        txt_primer = findViewById(R.id.txt_primer);
+        txt_segundo = findViewById(R.id.txt_segundo);
+        txt_tercero = findViewById(R.id.txt_tercero);
+        txt_cuarto = findViewById(R.id.txt_cuarto);
+        txt_quinto = findViewById(R.id.txt_quinto);
     }
 
+
+    public void consultar_datos_jugador_logeado(){
+        SharedPreferences prefs = getSharedPreferences("datos_session_login", Context.MODE_PRIVATE);
+        String rut_jugador_logeado = prefs.getString("rut_jugador_logeado", "");
+
+        if(rut_jugador_logeado.equals("")){
+            //NO ESTA LOGEADO
+            AlertDialog.Builder mensaje_login = new AlertDialog.Builder(Ranking.this);
+            mensaje_login.setPositiveButton("Ir a Perfil", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    Intent intent_perfil = new Intent(Ranking.this,Perfil.class);
+                    startActivity(intent_perfil);
+                }
+            });
+            mensaje_login.setMessage("INGRESA TUS DATOS PARA VER EL RANKING").create().show();
+
+        }else{
+
+            consultar_ranking();
+
+        }
+    }
+
+    public void consultar_ranking(){
+
+        Response.Listener<String> consulta_juego_listener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONObject respuestaJson = new JSONObject(response);
+                    String primero = respuestaJson.getString("primero");
+                    String segundo = respuestaJson.getString("segundo");
+                    String tercero = respuestaJson.getString("tercero");
+                    String cuarto = respuestaJson.getString("cuarto");
+                    String quinto = respuestaJson.getString("quinto");
+
+                    txt_primer.setText(primero);
+                    txt_segundo.setText(segundo);
+                    txt_tercero.setText(tercero);
+                    txt_cuarto.setText(cuarto);
+                    txt_quinto.setText(quinto);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        SharedPreferences prefs = getSharedPreferences("datos_session_login", Context.MODE_PRIVATE);
+        int curso_jugador_logeado = prefs.getInt("curso_jugador_logeado", 0);
+
+        Juegos consulta_ranking = new Juegos(curso_jugador_logeado,0,"http://www.matlapp.cl/matlapp_app/juego/ranking_curso.php" ,consulta_juego_listener );
+        RequestQueue queue = Volley.newRequestQueue(Ranking.this);
+        queue.add(consulta_ranking);
+    }
 
     public void cargarFuncionesMenu(){
         //CODIGO PARA REDIRECCIONAR CON EL BORON_INSTRUCCIONES
@@ -74,6 +146,16 @@ public class Ranking extends AppCompatActivity {
                     consultar_juego_activo_jugador();
                 }
 
+            }
+        });
+
+
+        //CODIGO PARA REDIRECCIONAR CON EL BOTON ATRAS
+        btn_volver = findViewById(R.id.btn_volver);
+        btn_volver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Ranking.super.onBackPressed();
             }
         });
 

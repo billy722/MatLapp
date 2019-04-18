@@ -29,7 +29,7 @@
 
 
             <Button
-                android:id="@+id/btn_nuevo_juego"
+                android:id="@+id/btn_seguir_jugando"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/fondo_boton"

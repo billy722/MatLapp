@@ -22,6 +22,7 @@ public class Instrucciones extends AppCompatActivity {
     Button boton_perfil;
     Button boton_preguntarjeta;
     Button boton_ranking;
+    Button btn_volver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +75,15 @@ public class Instrucciones extends AppCompatActivity {
                 Instrucciones.this.startActivity(intent_ranking);
                 finish();
 
+            }
+        });
+
+        //CODIGO PARA REDIRECCIONAR CON EL BOTON ATRAS
+        btn_volver = findViewById(R.id.btn_volver);
+        btn_volver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Instrucciones.super.onBackPressed();
             }
         });
     }
