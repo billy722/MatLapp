@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         musica_fondo = MediaPlayer.create(MainActivity.this,R.raw.musica_fondo);
-        musica_fondo.setLooping(true);
+        musica_fondo.setLooping(false);
         musica_fondo.start();
 
        btn_jugar = findViewById(R.id.btn_jugar);

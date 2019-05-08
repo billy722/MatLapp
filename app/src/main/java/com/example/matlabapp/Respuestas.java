@@ -47,6 +47,8 @@ public class Respuestas extends AppCompatActivity {
 
 
         imagen_respuesta = findViewById(R.id.imagen_respuesta);
+        btn_seguir_jugando = (Button)findViewById(R.id.btn_seguir_jugando);
+
 
         int respuesta = getIntent().getExtras().getInt("respuesta");
         id_preguntarjeta = getIntent().getExtras().getInt("id_preguntarjeta");
@@ -55,7 +57,6 @@ public class Respuestas extends AppCompatActivity {
 
         cargarFuncionesMenu();
 
-        btn_seguir_jugando = findViewById(R.id.btn_seguir_jugando);
         btn_seguir_jugando.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,7 +169,7 @@ public class Respuestas extends AppCompatActivity {
 
                       if(respuesta_json.equals("no")){
                           AlertDialog.Builder mensaje1 = new AlertDialog.Builder(Respuestas.this);
-                          mensaje1.setMessage("OPS! OCURRIO UN ERROR, ELIGE UNA PREGUNTA NUEVAMENTE: ").create().show();
+                          mensaje1.setMessage("UPS! OCURRIO UN ERROR, ELIGE UNA PREGUNTA NUEVAMENTE: ").create().show();
                       }else{
                           System.out.print("se guardo correctamente en bd. "+respuesta_json);
                       }
